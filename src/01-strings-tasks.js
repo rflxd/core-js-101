@@ -207,14 +207,24 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-  const topLCorner = '┌';
-  const topRCorner = '┐';
-  const bottomLCorner = '└';
-  const bottomRCorner = '┘';
-  const Shape = '';
-  for (let i = 1; i <= height; i += i) {
-
+  let Shape = '';
+  function addShape(corner1, corner2, mid, suffix) {
+    Shape += corner1;
+    let result = '';
+    const count = width - 2;
+    for (let b = 1; b <= count; b += 1) {
+      result += mid;
+    }
+    Shape += result;
+    Shape += corner2;
+    Shape += suffix;
   }
+  for (let i = 1; i <= height; i += 1) {
+    if (i === 1) addShape('┌', '┐', '─', '\n');
+    else if (i === height) addShape('└', '┘', '─', '');
+    else addShape('│', '│', ' ', '\n');
+  }
+  return Shape;
 }
 
 
@@ -234,8 +244,25 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const input = '!/;?:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const output = '!/;?:NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  const index = (char) => input.indexOf(char);
+  const translate = (char) => {
+    if (char === ' ') return null;
+    const i = index(char);
+    // if (output[i] === -1) return char;
+    return output[i];
+  };
+  if (str.split(' ').length > 1) {
+    const result = [];
+    const arr = str.split(' ');
+    arr.forEach((i) => {
+      result.push(i.trim().split('').map(translate).join(''));
+    });
+    return result.join(' ');
+  }
+  return str.split('').map(translate).join('');
 }
 
 /**
@@ -251,8 +278,9 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  if (typeof value === 'string') return true;
+  return value;
 }
 
 

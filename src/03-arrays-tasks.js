@@ -368,14 +368,15 @@ function get3TopItems(arr) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(arr) {
-  if (arr.length === 0) return 0;
-  let m = 0;
-  arr.map((i) => {
-    if (i > 0 && Number(i)) m += 1;
-    return m;
-  });
-  return m;
+function getPositivesCount(/* arr */) {
+  throw new Error('Not implemented');
+  // if (arr.length === 0) return 0;
+  // let m = 0;
+  // arr.map((i) => {
+  //   if (i > 0 && Number(i)) m += 1;
+  //   return m;
+  // });
+  // return m;
 }
 
 /**

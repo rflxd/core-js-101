@@ -309,13 +309,13 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  const result = [];
+  let result = [];
   let n = 1;
   let m = 1;
   const addStr = function addStr1(resultStr, str, num) {
-    let str1 = resultStr;
+    const str1 = resultStr;
     if (n <= num) {
-      str1 += str;
+      result.push(str);
       n += 1;
       return addStr1(str1, str, num);
     }
@@ -323,7 +323,8 @@ function propagateItemsByPositionIndex(arr) {
     return str1;
   };
   arr.map((i) => {
-    result.push(addStr('', i, m));
+    const arr1 = addStr('', i, m).split('');
+    result = result.concat(arr1);
     m += 1;
     return result;
   });
@@ -344,8 +345,13 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  const arr1 = [];
+  arr.sort((a, b) => a - b);
+  if (arr.length >= 1) arr1.push(arr[arr.length - 1]);
+  if (arr.length >= 2) arr1.push(arr[arr.length - 2]);
+  if (arr.length >= 3) arr1.push(arr[arr.length - 3]);
+  return arr1;
 }
 
 
@@ -362,8 +368,14 @@ function get3TopItems(/* arr */) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getPositivesCount(arr) {
+  if (arr.length === 0) return 0;
+  let m = 0;
+  arr.map((i) => {
+    if (i > 0 && Number(i)) m += 1;
+    return m;
+  });
+  return m;
 }
 
 /**

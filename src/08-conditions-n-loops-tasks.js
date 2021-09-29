@@ -181,8 +181,9 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const arr = [...new Set(str)];
+  return arr[0];
 }
 
 
@@ -225,8 +226,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -242,8 +243,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return Number(num.toString().split('').reverse().join(''));
 }
 
 
@@ -286,7 +287,22 @@ function isCreditCardNumber(/* ccn */) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+  throw new Error('Not Implemented');
+  // const sumtwo1 = function sumtwo2 (n) {
+  //   const numbers = n.toString().split('');
+  //   let result = 0;
+  //   let i = 0;
+  //   numbers.forEach((element) => {
+  //     element = parseInt(element, 10);
+  //     result = result + element;
+  //     i += 1;
+  //     if (i === numbers.length) {
+  //       if (result.toString().length >= 2)return sumtwo2(result);
+  //       return result;
+  //     }
+  //   }
+  // }
+  // return sumtwo1(num);
 }
 
 

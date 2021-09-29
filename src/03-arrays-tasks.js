@@ -175,8 +175,8 @@ function insertItem(arr, item, index) {
  *    [ 1, 3, 4, 5 ], 2 => [ 1, 3 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
-function getHead(/* arr, n */) {
-  throw new Error('Not implemented');
+function getHead(arr, n) {
+  return arr.filter((i) => arr.indexOf(i) <= n - 1);
 }
 
 
@@ -190,8 +190,8 @@ function getHead(/* arr, n */) {
  *    [ 1, 3, 4, 5 ], 2  => [ 4, 5 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
-function getTail(/* arr, n */) {
-  throw new Error('Not implemented');
+function getTail(arr, n) {
+  return arr.filter((i) => arr.indexOf(i) >= arr.length - n);
 }
 
 
@@ -215,8 +215,18 @@ function getTail(/* arr, n */) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  let str = '';
+  arr.map((i) => {
+    if (arr.indexOf(i) === arr.length - 1) {
+      str += i.join(',');
+      return str;
+    }
+    str += i.join(',');
+    str += '\n';
+    return str;
+  });
+  return str;
 }
 
 /**
@@ -230,8 +240,8 @@ function toCsvText(/* arr */) {
  *   [ 0, 1, 2, 3, 4, 5 ] => [ 0, 1, 4, 9, 16, 25 ]
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
-function toArrayOfSquares(/* arr */) {
-  throw new Error('Not implemented');
+function toArrayOfSquares(arr) {
+  return arr.map((i) => i ** 2);
 }
 
 
@@ -249,8 +259,23 @@ function toArrayOfSquares(/* arr */) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  const result = [];
+  const arr1 = arr;
+  const check = function check1() {
+    if (arr1.length >= 1) {
+      let previous;
+      if (result[result.length - 1]) previous = result[result.length - 1];
+      else previous = 0;
+      const current = arr1[0];
+      const num = previous + current;
+      arr1.shift();
+      result.push(num);
+      return check1();
+    }
+    return result;
+  };
+  return check();
 }
 
 /**
@@ -264,8 +289,8 @@ function getMovingSum(/* arr */) {
  * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
  * [ "a" ] => []
  */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
+function getSecondItems(arr) {
+  return arr.filter((i) => (arr.indexOf(i) + 1) % 2 === 0);
 }
 
 
@@ -283,8 +308,26 @@ function getSecondItems(/* arr */) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  const result = [];
+  let n = 1;
+  let m = 1;
+  const addStr = function addStr1(resultStr, str, num) {
+    let str1 = resultStr;
+    if (n <= num) {
+      str1 += str;
+      n += 1;
+      return addStr1(str1, str, num);
+    }
+    n = 1;
+    return str1;
+  };
+  arr.map((i) => {
+    result.push(addStr('', i, m));
+    m += 1;
+    return result;
+  });
+  return result;
 }
 
 
